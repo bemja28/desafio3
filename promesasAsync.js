@@ -7,6 +7,21 @@
     let response = await fetch("https://dummyjson.com/" + patch)
 
     let result = await response.json()
+
+    const mujeres = result.users
+                  .filter((mujer) => {
+                      return  mujer.gender == "female"
+                  })
+                  
+
+    const hombres = result.users
+                  .filter((hombre) => {
+                    return  hombre.gender == "male"
+                  })
+                  
+
+
+
     try {
       if (patch == "products") {
       console.log("PRODUCTOS");
@@ -16,11 +31,18 @@
         console.log(`(${i + 1}) ${result.products[i].title} - ${result.products[i].category} - ${result.products[i].price}`)
     }
     }if (patch == "users") {
-      console.log("USUARIOS");
+      console.log("USUARIOS MUJERES");
 
-      for (let i = 0; i < result.users.length; i++) {
+      for (let i = 0; i < mujeres.length; i++) {
         
-        console.log(`(${i + 1}) ${result.users[i].firstName} - ${result.users[i].lastName}`)
+        console.log(`(${i + 1}) ${mujeres[i].firstName} - ${mujeres[i].lastName}`)
+    }
+
+    console.log("USUARIOS HOMBRES");
+
+      for (let i = 0; i < hombres.length; i++) {
+          
+        console.log(`(${i + 1}) ${hombres[i].firstName} - ${hombres[i].lastName}`)
     }
     }if (patch == "comments") {
       console.log("COMENTARIOS");
